@@ -46,24 +46,11 @@ We are using [docker](https://www.docker.com/) to create our development environ
 ## Labels for issues and pull-requests 
 ...and what they mean!
 
-1. **Bug**
-  * A bug in the application, something is wrong and needs to be fixed
-  * Ideally the issue includes details on how to reproduce the bug
-1. **Feature**
-  * A feature is a new functionality for the app
-  * Ideally the issue includes a detailed description how this should work
-    and especially why it is usefull
-1. **Documentation**
-  * Related to the documentation of our application, eg our INSTALL.md file or a wiki page with
-    instructions on how to use the app
-1. **Grooming**
-  * This is working, but could look better, thus needs some attention and grooming.
-1. **Junior**
-  * Easy to address issues for ruby beginners or people unfamiliar with the application.
-1. **Refactorization**
-  * Our code needs to be re-written; to avoid code duplication, or make the code more readable, or do things in a simpler way!
-1. **Research**
-  * Ideas to explore; and think if there is anything we want to include in our app.
+1. **Bug**: A problem in the application, something is wrong and needs to be fixed. Ideally the issue includes details on how to reproduce the bug
+1. **Feature**: New functionality for the app. Ideally the issue includes a detailed description how this should work and especially why it is usefull
+1. **Junior**: Easy to address tasks for beginners or people unfamiliar with the application.
+1. **Refactorization**: Code needs to be re-written to do things in a simpler/saner way!
+1. **Research**: Ideas to explore and form an opinion about
 
 ## Code of Conduct
 `orr` is part of the openSUSE project. We follow all the [openSUSE Guiding Principles!](http://en.opensuse.org/openSUSE:Guiding_principles) If you think someone doesn't do that, please let the [openSUSE Board](mailto:board@opensuse.org) know!

@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+require 'clamp'
+require 'rbconfig'
+Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each {|file| require file } 
+
+Clamp do
+
+  option ["--version", "-v"], :flag, "Show version" do
+    puts "orr 0.1"
+    exit(0)
+  end
+
+  self.default_subcommand = "info"
+
+  subcommand "info", "show information for current ruby", OrrInfoCommand
+  subcommand "search", "show available ruby versions", OrrSearchCommand 
+  subcommand "use", "setup current shell to use a specific ruby version", OrrUseCommand
+  subcommand "reset", "remove default and current settings, exit the shell", OrrResetCommand
+  subcommand "list", "show currently installed versions", OrrListCommand
+  subcommand "implode", "removes all ruby installations (except the default one), removes orr and all other traces", OrrImplodeCommand
+  subcommand "do", "runs a named ruby file against specified and/or all rubies", OrrDoCommand
+  subcommand "install", "install one or many ruby versions", OrrInstallCommand
+  subcommand "upgrade", "install new ruby, copy gems, make gems pristine, remove old ruby", OrrUpgradeCommand
+  subcommand "reinstall", "remove ruby, install it, make gems pristine", OrrReinstallCommand
+  subcommand ["uninstall", "remove"], "uninstall one or many ruby versions", OrrUninstallCommand
+end

@@ -3,12 +3,16 @@ require_relative '../plugins/' + File.basename(__FILE__, '_spec.rb')
 
 describe OrrInfoCommand do
   before do
-    @info = OrrInfoCommand.new
+    invocation_path = ""
+    @info = OrrInfoCommand.new(invocation_path)
   end
 
   describe "when executed" do
     it "must respond" do
-      @info.run.must_equal "OHAI!"
+      arguments = []
+      assert_output(/system:/) {
+        @info.run(arguments)
+      }
     end
   end
 

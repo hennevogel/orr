@@ -41,6 +41,7 @@ system:
 EOT
     puts orr_info
   end
+
   def get_bash_info
     @bash_path = `which bash`.gsub("\n", '')
     @bash_version = `bash --version|head -n1`.gsub("\n", '') if !@bash_path.empty?

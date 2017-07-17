@@ -14,6 +14,19 @@ describe OrrInfoCommand do
         @info.run(arguments)
       }
     end
-  end
 
+    it "returns ruby path" do
+      mock = Minitest::Mock.new
+      mock.expect :run, "/path/to/ruby", ["which ruby"]
+      mock.expect :run, "/path/to/irb", ["which irb"]
+      mock.expect :run, "/path/to/gem", ["which gem"]
+      mock.expect :run, "/path/to/rake", ["which rake"]
+      @info.stub :shell_command, mock do
+        arguments = []
+        assert_output(/ruby:\s*"\/path\/to\/ruby/) {
+          @info.run(arguments)
+        }
+      end
+    end
+  end
 end

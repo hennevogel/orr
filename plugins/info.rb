@@ -1,3 +1,5 @@
+require_relative "../lib/shell_command"
+
 class OrrInfoCommand < Clamp::Command
   def execute
     uname_output = `uname -a`.gsub("\n", '')
@@ -24,10 +26,10 @@ system:
     ruby:         "not set"
 
   binaries:
-    ruby:         "/usr/bin/ruby"
-    irb:          "/usr/bin/irb"
-    gem:          "/usr/bin/gem"
-    rake:         "/usr/bin/rake"
+    ruby:         "#{get_executable("ruby")}"
+    irb:          "#{get_executable("irb")}"
+    gem:          "#{get_executable("gem")}"
+    rake:         "#{get_executable("rake")}"
 
   environment:
     PATH:         "/home/vagrant/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/home/vagrant/.rvm/bin"
@@ -46,5 +48,13 @@ EOT
     @bash_path = `which bash`.gsub("\n", '')
     @bash_version = `bash --version|head -n1`.gsub("\n", '') if !@bash_path.empty?
     @bash_version = "not installed" if @bash_path.empty?
+  end
+
+  def get_executable(command)
+    shell_command.run("which #{command}")
+  end
+
+  def shell_command
+    ShellCommand.new
   end
 end

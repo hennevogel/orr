@@ -8,20 +8,8 @@ system:
 
   system:
     uname:        "#{uname_output}"
-    name:         "openSUSE"
-    version:      "42.2"
     architecture: "#{RbConfig::CONFIG['target_cpu']}"
     bash:         "#{@bash_path} => #{@bash_version}"
-    zsh:          "#{@zsh_path} => #{@zsh_version}"
-
-  orr:
-    version:      "0.1"
-    path:         "/home/vagrant/.rvm"
-    autolibs:     "[4] Allow RVM to use package manager if found, install missing dependencies, install package manager (only OS X)."
-
-  homes:
-    gem:          "not set"
-    ruby:         "not set"
 
   binaries:
     ruby:         "#{get_executable("ruby")}"
@@ -30,13 +18,8 @@ system:
     rake:         "#{get_executable("rake")}"
 
   environment:
-    PATH:         "/home/vagrant/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/home/vagrant/.rvm/bin"
-    GEM_HOME:     ""
-    GEM_PATH:     ""
-    MY_RUBY_HOME: ""
-    IRBRC:        ""
-    RUBYOPT:      ""
-    gemset:       ""
+    PATH:         "#{ENV['PATH']}"
+    GEM_HOME:     "#{ENV['GEM_HOME']}"
 
 EOT
     puts orr_info

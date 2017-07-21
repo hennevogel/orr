@@ -1,4 +1,4 @@
-class OrrUninstallCommand < Clamp::Command
+class OrrUninstallCommand < OrrCommand
   def execute
     puts "uninstall"
   end

@@ -1,4 +1,4 @@
-class OrrRemoveCommand < Clamp::Command
+class OrrRemoveCommand < OrrCommand
   def execute
     puts "remove"
   end

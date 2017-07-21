@@ -1,6 +1,4 @@
-require_relative "../lib/shell_command"
-
-class OrrInfoCommand < Clamp::Command
+class OrrInfoCommand < OrrCommand
   def execute
     uname_output = `uname -a`.gsub("\n", '')
     get_bash_info
@@ -52,9 +50,5 @@ EOT
 
   def get_executable(command)
     shell_command.run("which #{command}")
-  end
-
-  def shell_command
-    ShellCommand.new
   end
 end

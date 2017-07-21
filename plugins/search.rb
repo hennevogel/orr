@@ -1,7 +1,4 @@
-require_relative "../lib/shell_command"
-require "rexml/document"
-
-class OrrSearchCommand < Clamp::Command
+class OrrSearchCommand < OrrCommand
   def execute
     rubies = []
 
@@ -19,9 +16,5 @@ class OrrSearchCommand < Clamp::Command
     end
 
     puts rubies.join("\n")
-  end
-
-  def shell_command
-    ShellCommand.new
   end
 end

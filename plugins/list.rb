@@ -1,4 +1,4 @@
-class OrrListCommand < Clamp::Command
+class OrrListCommand < OrrCommand
   def execute
     puts "Installed ruby versions:"
     rpms = shell_command.run("rpm -qa")
@@ -20,9 +20,5 @@ class OrrListCommand < Clamp::Command
     ruby_name = $1
     ruby_version = shell_command.run("ruby -v")
     puts "* #{ruby_name} (path: #{ruby_path}, version: #{ruby_version})"
-  end
-
-  def shell_command
-    ShellCommand.new
   end
 end

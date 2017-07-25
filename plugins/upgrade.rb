@@ -1,4 +1,4 @@
-class OrrUpgradeCommand < Clamp::Command
+class OrrUpgradeCommand < OrrCommand
   def execute
     puts "upgrade"
   end

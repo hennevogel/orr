@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-require 'clamp'
-require 'rbconfig'
+require_relative 'lib/orr'
 Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each {|file| require file } 
 
 Clamp do

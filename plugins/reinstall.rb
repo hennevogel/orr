@@ -1,4 +1,4 @@
-class OrrReinstallCommand < Clamp::Command
+class OrrReinstallCommand < OrrCommand
   def execute
     puts "reinstall"
   end

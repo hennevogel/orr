@@ -1,4 +1,4 @@
-class OrrDoCommand < Clamp::Command
+class OrrDoCommand < OrrCommand
   def execute
     puts "do"
   end

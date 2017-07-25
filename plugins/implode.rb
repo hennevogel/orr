@@ -1,4 +1,4 @@
-class OrrImplodeCommand < Clamp::Command
+class OrrImplodeCommand < OrrCommand
   def execute
     puts "implode"
   end

@@ -1,4 +1,4 @@
-class OrrResetCommand < Clamp::Command
+class OrrResetCommand < OrrCommand
   def execute
     puts "reset"
   end

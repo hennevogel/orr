@@ -1,80 +1,33 @@
 class OrrInstallCommand < OrrCommand
   parameter "VERSION ...", "Ruby version", :attribute_name => :ruby_version_arg
 
-  def home_dir
-    Pathname(ENV["HOME"])
-  end
-
   def execute
     ruby_version = ruby_version_arg.first
-    bin_dir = home_dir + "bin"
 
-    puts "Installing ruby#{ruby_version} in #{bin_dir}"
+    puts "Installing ruby#{ruby_version} in #{BIN_DIR}"
 
     shell_command.run_interactive("sudo zypper in ruby#{ruby_version}")
 
-    ["ruby", "irb", "gem", "rake"].each do |cmd|
-      if File.exist?(bin_dir + cmd)
-        File.delete(bin_dir + cmd)
-      end
-      File.symlink("/usr/bin/#{cmd}.ruby#{ruby_version}", bin_dir + cmd)
+    FileUtils.cd(BIN_DIR) do
+      FileUtils.rm_f ORR_BINARIES
+    end
+    ORR_BINARIES.each do |cmd|
+      File.symlink("/usr/bin/#{cmd}.ruby#{ruby_version}", BIN_DIR + cmd)
     end
 
-    edit_bashrc(ruby_version)
+    replace_profile(ruby_version)
     edit_gemrc
 
     puts "Make sure to restart your shell to make new GEM_HOME and PATH settings active"
   end
 
-  def edit_bashrc(ruby_version)
-    bashrc = home_dir + ".bashrc"
+  def replace_profile(ruby_version)
+    export_gem_home = "export GEM_HOME=~/.gems/ruby#{ruby_version}"
+    export_path = "export PATH=$GEM_HOME/bin:$PATH"
 
-    export_gem_home = "export GEM_HOME=~/.gems/ruby#{ruby_version}\n"
-    export_path = "export PATH=$GEM_HOME/bin:$PATH\n"
-
-    bashrc_out = ""
-    found_home = false
-    found_path = false
-    bashrc.each_line do |line|
-      if line =~ /^export GEM_HOME=/
-        bashrc_out += export_gem_home
-        found_home = true
-      elsif line =~ /^export PATH=\$GEM_HOME\/bin:\$PATH/
-        bashrc_out += line
-        found_path = true
-      else
-        bashrc_out += line
-      end
+    File.open(PROFILE_FILE, 'w') do |f|
+      f.puts(export_gem_home)
+      f.puts(export_path)
     end
-    if !found_home
-      bashrc_out += export_gem_home
-    end
-    if !found_path
-      bashrc_out += export_path
-    end
-
-    File.write(bashrc, bashrc_out)
-  end
-
-  def edit_gemrc
-    gemrc = home_dir + ".gemrc"
-
-    install_setting = "install: --no-format-executable"
-
-    gemrc_out = ""
-    found_install_setting = false
-    if File.exist?(gemrc)
-      gemrc.each_line do |line|
-        if line.chomp == install_setting
-          found_install_setting = true
-        end
-        gemrc_out += line
-      end
-    end
-    if !found_install_setting
-      gemrc_out += install_setting + "\n"
-    end
-
-    File.write(gemrc, gemrc_out)
   end
 end

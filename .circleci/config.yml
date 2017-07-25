@@ -1,14 +1,47 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
 version: 2
 jobs:
-  build:
+  test421:
+    docker:
+      # specify the version you desire here
+       - image: opensuse:42.1
+
+    working_directory: ~/repo
+
+    steps:
+      - run:
+          name: install system dependencies
+          command: |
+            zypper -q --non-interactive install ruby 'rubygem(bundler)' which git-core openssh
+
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install our bundle
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            bundle exec rake test
+  test422:
     docker:
       # specify the version you desire here
        - image: opensuse:42.2
-      
+
     working_directory: ~/repo
 
     steps:
@@ -41,3 +74,10 @@ jobs:
           name: run tests
           command: |
             bundle exec rake test
+
+workflows:
+  version: 2
+  all_distros:
+    jobs:
+      - test422
+      - test421

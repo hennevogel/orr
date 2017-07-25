@@ -1,14 +1,8 @@
-FROM opensuse:42.2
+FROM hennevogel/orr:latest
 ARG IMAGE_USERID
 
-# Update distro
-RUN zypper -q --non-interactive update 
-
-# Install some system requirements
+# Install some development requirements
 RUN zypper -q --non-interactive install timezone vim aaa_base glibc-locale sudo curl less tar which command-not-found
-
-# Install ruby
-RUN zypper -q --non-interactive install ruby2.1
 
 # Setup sudo
 RUN echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers

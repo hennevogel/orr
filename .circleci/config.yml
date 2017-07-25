@@ -3,16 +3,11 @@ jobs:
   test421:
     docker:
       # specify the version you desire here
-       - image: opensuse:42.1
+       - image: hennevogel/orr:421
 
     working_directory: ~/repo
 
     steps:
-      - run:
-          name: install system dependencies
-          command: |
-            zypper -q --non-interactive install ruby 'rubygem(bundler)' which git-core openssh
-
       - checkout
 
       # Download and cache dependencies
@@ -40,16 +35,11 @@ jobs:
   test422:
     docker:
       # specify the version you desire here
-       - image: opensuse:42.2
+       - image: hennevogel/orr:422
 
     working_directory: ~/repo
 
     steps:
-      - run:
-          name: install system dependencies
-          command: |
-            zypper -q --non-interactive install ruby 'rubygem(bundler)' which git-core openssh
- 
       - checkout
 
       # Download and cache dependencies

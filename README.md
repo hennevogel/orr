@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/hennevogel/orr/tree/master.svg?style=svg)](https://circleci.com/gh/hennevogel/orr/tree/master)
+
 # orr - openSUSE RVM replacement
 A command-line tool command-line tool which allows you to easily install,
 manage, and work with multiple ruby environments on openSUSE Distributions.

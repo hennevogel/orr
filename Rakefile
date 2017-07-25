@@ -8,13 +8,6 @@ task :suitup do
   sh "docker run -it hennevogel/orr:dev"
 end
 
-task :test do
-  puts 'God you are boring...'
-  Rake::Task["ohno"].invoke
-end
-
 Rake::TestTask.new do |t|
   t.pattern = "spec/*_spec.rb"
-  t.name = :ohno
-  t.description = 'Let the test suite yell at you for being a useless plonker'
 end

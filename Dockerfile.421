@@ -1,0 +1,14 @@
+FROM opensuse:42.1
+
+# Update distro
+RUN zypper -q --non-interactive update 
+
+# Install some system requirements
+RUN zypper -q --non-interactive install ruby 'rubygem(bundler)' which git-core openssh 
+
+# Add our users
+RUN useradd -m orr
+
+# Run our command
+USER orr 
+CMD ["bash", "-l"] 

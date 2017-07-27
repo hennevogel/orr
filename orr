@@ -1,7 +1,14 @@
 #!/usr/bin/env ruby
 require_relative 'lib/orr'
-Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each {|file| require file } 
 
+include OrrConfig
+# Setup what we need...
+orr_setup
+
+# Load all plugins
+Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each {|file| require file }
+
+# Setup commands
 Clamp do
 
   option ["--version", "-v"], :flag, "Show version" do
@@ -12,7 +19,7 @@ Clamp do
   self.default_subcommand = "info"
 
   subcommand "info", "show information for current ruby", OrrInfoCommand
-  subcommand "search", "show available ruby versions", OrrSearchCommand 
+  subcommand "search", "show available ruby versions", OrrSearchCommand
   subcommand "use", "setup current shell to use a specific ruby version", OrrUseCommand
   subcommand "reset", "remove default and current settings, exit the shell", OrrResetCommand
   subcommand "list", "show currently installed versions", OrrListCommand

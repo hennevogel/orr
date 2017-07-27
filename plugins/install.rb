@@ -6,7 +6,8 @@ class OrrInstallCommand < OrrCommand
 
     puts "Installing ruby#{ruby_version} in #{BIN_DIR}"
 
-    shell_command.run_interactive("sudo zypper in ruby#{ruby_version}")
+    success = shell_command.run_interactive("sudo zypper in -f ruby#{ruby_version}")
+    return unless success
 
     FileUtils.cd(BIN_DIR) do
       FileUtils.rm_f ORR_BINARIES

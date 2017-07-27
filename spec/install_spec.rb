@@ -17,7 +17,7 @@ EOT
     it "installs given ruby version" do
       arguments = ["2.3"]
       mock = Minitest::Mock.new
-      mock.expect :run_interactive, nil, ["sudo zypper in ruby2.3"]
+      mock.expect :run_interactive, true, ["sudo zypper in -f ruby2.3"]
 
       @cmd.stub :shell_command, mock do
         assert_output(/^Installing ruby2.3 in #{BIN_DIR}\n/) do
@@ -47,7 +47,7 @@ EOT
     it "installs given ruby version" do
       arguments = ["2.4"]
       mock = Minitest::Mock.new
-      mock.expect :run_interactive, nil, ["sudo zypper in ruby2.4"]
+      mock.expect :run_interactive, true, ["sudo zypper in -f ruby2.4"]
 
       @cmd.stub :shell_command, mock do
         assert_output(/^Installing ruby2.4 in #{BIN_DIR}\n/) do

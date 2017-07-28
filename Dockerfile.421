@@ -4,7 +4,7 @@ FROM opensuse:42.1
 RUN zypper -q --non-interactive update 
 
 # Install some system requirements
-RUN zypper -q --non-interactive install ruby 'rubygem(bundler)' which git-core openssh 
+RUN zypper -q --non-interactive install ruby 'rubygem(bundler)' which git-core openssh openSUSE-release
 
 # Add our users
 RUN useradd -m orr

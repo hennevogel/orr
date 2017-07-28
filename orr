@@ -3,7 +3,7 @@ require_relative 'lib/orr'
 
 include OrrConfig
 # Setup what we need...
-orr_setup
+OrrSetup.new.setup
 
 # Load all plugins
 Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each {|file| require file }

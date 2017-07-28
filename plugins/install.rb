@@ -5,7 +5,7 @@ class OrrInstallCommand < OrrCommand
     ruby_version = ruby_version_arg.first
 
     puts "Installing ruby#{ruby_version} in #{BIN_DIR}"
-
+    OrrSetup.new.add_repo
     success = shell_command.run_interactive("sudo zypper in -f ruby#{ruby_version}")
     return unless success
 

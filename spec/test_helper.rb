@@ -9,7 +9,7 @@ require 'pry'
 require_relative "../lib/orr.rb"
 
 include OrrConfig
-orr_setup
+OrrSetup.new.setup
 
 class Minitest::Test
   # After each test...

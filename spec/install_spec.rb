@@ -11,7 +11,7 @@ describe OrrInstallCommand do
     before do
       @expected_profile_content = <<EOT
 export GEM_HOME=~/.gems/ruby2.3
-export PATH=$GEM_HOME/bin:$PATH
+export PATH=#{BIN_DIR}:$GEM_HOME/bin:$PATH
 EOT
     end
     it "installs given ruby version" do
@@ -40,7 +40,7 @@ EOT
       end
       @expected_profile_content = <<EOT
 export GEM_HOME=~/.gems/ruby2.4
-export PATH=$GEM_HOME/bin:$PATH
+export PATH=#{BIN_DIR}:$GEM_HOME/bin:$PATH
 EOT
     end
 

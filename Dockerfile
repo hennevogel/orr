@@ -1,15 +1,16 @@
 FROM hennevogel/orr:latest
 ARG IMAGE_USERID
 
+USER root
 # Install some development requirements
 RUN zypper -q --non-interactive install timezone vim aaa_base glibc-locale sudo curl less tar which command-not-found
 
 # Setup sudo
-RUN echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+RUN echo 'orr ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 # Add our users
-RUN useradd -m vagrant -u $IMAGE_USERID -p "$6$UXwpVIiI8InScbAC$6SUFh/sltxF9lWLdSwLyIv6v8wNsKgiqyeNwMdzqCoqfyh3gE/FyJA0QWxUZxF9CefDr4e7E0OVL4foq78GtI0" 
-RUN useradd -m rvm -p "$6$UXwpVIiI8InScbAC$6SUFh/sltxF9lWLdSwLyIv6v8wNsKgiqyeNwMdzqCoqfyh3gE/FyJA0QWxUZxF9CefDr4e7E0OVL4foq78GtI0" 
+RUN useradd -m rvm
+RUN useradd -m orr-dev -u $IMAGE_USERID
 
 # Setup rvm
 USER rvm
@@ -17,5 +18,5 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A170311380
 RUN curl -sSL https://get.rvm.io | bash -s stable
 
 # Run our command
-USER vagrant
+USER orr-dev
 CMD ["bash", "-l"] 

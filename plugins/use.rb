@@ -4,6 +4,11 @@ class OrrUseCommand < OrrCommand
   def execute
     ruby_version = ruby_version_arg.first
 
+    available_rubies = OrrListCommand.new('').query_system
+    unless available_rubies.include?(ruby_version)
+      signal_usage_error "Ruby #{ruby_version} not installed. Install it with: orr install #{ruby_version}"
+    end
+
     FileUtils.cd(BIN_DIR) do
       FileUtils.rm_f ORR_BINARIES
     end

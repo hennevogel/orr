@@ -7,5 +7,5 @@ module OrrConfig
   BASHRC_FILE = HOME_DIR + '.bashrc'
   ORR_BINARIES = %w[ruby irb gem rake].freeze
   OS_RELEASE = OrrSetup.new.osrelease_hash
-  SUPPORTED_OS = %w[openSUSE_42.1 openSUSE_42.2 openSUSE_42.3]
+  SUPPORTED_OS = %w[openSUSE_42.1 openSUSE_42.2 openSUSE_42.3 openSUSE_Tumbleweed]
 end

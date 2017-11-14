@@ -10,10 +10,10 @@ end
 
 desc 'Rebuild our docker images and publish them'
 task :rebuild_images do
-  sh "docker build . -t hennevogel/orr:422 -t hennevogel/orr:latest -f Dockerfile.422"
-  sh "docker build . -t hennevogel/orr:421 -f Dockerfile.421"
+  sh "docker build . -t hennevogel/orr:423 -t hennevogel/orr:latest -f Dockerfile.423"
+  sh "docker build . -t hennevogel/orr:422 -f Dockerfile.422"
+  sh "docker push hennevogel/orr:423"
   sh "docker push hennevogel/orr:422"
-  sh "docker push hennevogel/orr:421"
 end
 
 Rake::TestTask.new do |t|

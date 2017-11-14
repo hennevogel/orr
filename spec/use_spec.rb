@@ -18,7 +18,11 @@ EOT
     end
 
     it "uses given ruby version" do
-      @cmd.run(['2.5'])
+      list_command = MiniTest::Mock.new
+      list_command.expect :query_system, ['2.5']
+      OrrListCommand.stub :new, list_command do
+        @cmd.run(['2.5'])
+      end
       ORR_BINARIES.each do |cmd|
         assert_equal("/usr/bin/#{cmd}.ruby2.5", File.readlink(BIN_DIR + cmd))
       end

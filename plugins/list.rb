@@ -1,7 +1,7 @@
 class OrrListCommand < OrrCommand
   def execute
     puts "Installed ruby versions:"
-    rpms = shell_command.run("rpm -qa")
+    rpms = shell_command.run("rpm -qa ruby\*")
     rubies = []
     rpms.each_line do |rpm|
       if rpm =~ /^(ruby\d.\d+)-\d/

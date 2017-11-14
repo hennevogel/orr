@@ -20,7 +20,7 @@ ruby-devel-2.2-1.3.x86_64
 EOT
 
       mock = Minitest::Mock.new
-      mock.expect :run, rpm_out, ["rpm -qa"]
+      mock.expect :run, rpm_out, ["rpm -qa ruby\*"]
       mock.expect :run, "/path/to/ruby", ["which ruby"]
       mock.expect :run, "ruby2.2-2.2.5-1.5.x86_64", ["rpm -qf /path/to/ruby"]
       mock.expect :run, "ruby 2.2.5p319 (2016-04-26 revision 54774) [x86_64-linux-gnu]", ["ruby -v"]

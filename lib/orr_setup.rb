@@ -52,6 +52,7 @@ class OrrSetup
 
   def add_repo
     distro = "#{OS_RELEASE['NAME'].tr(' ', '_')}_#{OS_RELEASE['VERSION_ID']}"
+    distro = 'openSUSE_Tumbleweed' if OS_RELEASE['NAME'] == 'openSUSE Tumbleweed'
     unless SUPPORTED_OS.include?(distro)
       puts "Operating System (#{distro}) not supported"
       return false

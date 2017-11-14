@@ -1,37 +1,5 @@
 version: 2
 jobs:
-  test421:
-    docker:
-      # specify the version you desire here
-       - image: hennevogel/orr:421
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run:
-          name: install our bundle
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # run tests!
-      - run:
-          name: run tests
-          command: |
-            bundle exec rake test
   test422:
     docker:
       # specify the version you desire here
@@ -50,7 +18,39 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: install our bundle 
+          name: Install bundle
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # run tests!
+      - run:
+          name: Run tests
+          command: |
+            bundle exec rake test
+  test423:
+    docker:
+      # specify the version you desire here
+       - image: hennevogel/orr:423
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: Install bundle
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
@@ -61,7 +61,7 @@ jobs:
         
       # run tests!
       - run:
-          name: run tests
+          name: Run tests
           command: |
             bundle exec rake test
 
@@ -69,5 +69,5 @@ workflows:
   version: 2
   all_distros:
     jobs:
+      - test423
       - test422
-      - test421

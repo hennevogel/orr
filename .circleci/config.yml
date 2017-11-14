@@ -1,9 +1,9 @@
 version: 2
 jobs:
-  test421:
+  test422:
     docker:
       # specify the version you desire here
-       - image: hennevogel/orr:421
+       - image: hennevogel/orr:422
 
     working_directory: ~/repo
 
@@ -32,10 +32,10 @@ jobs:
           name: run tests
           command: |
             bundle exec rake test
-  test422:
+  test423:
     docker:
       # specify the version you desire here
-       - image: hennevogel/orr:422
+       - image: hennevogel/orr:423
 
     working_directory: ~/repo
 
@@ -69,5 +69,5 @@ workflows:
   version: 2
   all_distros:
     jobs:
+      - test423
       - test422
-      - test421

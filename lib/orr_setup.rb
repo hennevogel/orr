@@ -51,14 +51,7 @@ class OrrSetup
   end
 
   def add_repo
-    distro = "#{OS_RELEASE['NAME'].tr(' ', '_')}_#{OS_RELEASE['VERSION_ID']}"
-    distro = 'openSUSE_Tumbleweed' if OS_RELEASE['NAME'] == 'openSUSE Tumbleweed'
-    unless SUPPORTED_OS.include?(distro)
-      puts "Operating System (#{distro}) not supported"
-      return false
-    end
-
-    repo_url = "http://download.opensuse.org/repositories/devel:/languages:/ruby/#{distro}"
+    repo_url = "http://download.opensuse.org/repositories/devel:/languages:/ruby/#{DISTRO}"
     shell_command.run("grep -q \'baseurl=#{repo_url}\' /etc/zypp/repos.d/*")
     shell_command.run_interactive("sudo zypper ar -f #{repo_url}/devel:languages:ruby.repo") unless $?.exitstatus == 0
   end

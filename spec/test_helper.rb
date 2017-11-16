@@ -18,7 +18,7 @@ class Minitest::Test
     FileUtils.cd(BIN_DIR) do
        FileUtils.rm_f ORR_BINARIES
     end
-    FileUtils.rm_f [GEMRC_FILE, BASHRC_FILE, PROFILE_FILE]
+    FileUtils.rm_f [GEMRC_FILE, SHELL_PROFILE_FILE, PROFILE_FILE]
   end
 end
 

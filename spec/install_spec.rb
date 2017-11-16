@@ -27,7 +27,7 @@ EOT
         end
       end
       ORR_BINARIES.each do |cmd|
-        assert_equal("/usr/bin/#{cmd}.ruby2.3", File.readlink(BIN_DIR + cmd))
+        assert_equal("/usr/bin/#{cmd}.ruby2.3", File.readlink("#{BIN_DIR}/#{cmd}"))
       end
 
       assert_equal(@expected_profile_content, File.read(PROFILE_FILE))
@@ -37,7 +37,7 @@ EOT
   describe "when ruby version is already installed" do
     before do
       ORR_BINARIES.each do |cmd|
-        File.symlink("/usr/bin/#{cmd}.ruby2.2", BIN_DIR + cmd)
+        File.symlink("/usr/bin/#{cmd}.ruby2.2", "#{BIN_DIR}/#{cmd}")
       end
       @expected_profile_content = <<EOT
 export GEM_HOME=~/.gems/ruby2.4
@@ -59,7 +59,7 @@ EOT
       end
 
       ORR_BINARIES.each do |cmd|
-        assert_equal("/usr/bin/#{cmd}.ruby2.4", File.readlink(BIN_DIR + cmd))
+        assert_equal("/usr/bin/#{cmd}.ruby2.4", File.readlink("#{BIN_DIR}/#{cmd}"))
       end
 
       assert_equal(@expected_profile_content, File.read(PROFILE_FILE))

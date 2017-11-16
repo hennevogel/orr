@@ -8,7 +8,7 @@ describe OrrUseCommand do
       @cmd = OrrUseCommand.new('')
 
       ORR_BINARIES.each do |cmd|
-        File.symlink("/usr/bin/#{cmd}.ruby2.2", BIN_DIR + cmd)
+        File.symlink("/usr/bin/#{cmd}.ruby2.2", "#{BIN_DIR}/#{cmd}")
       end
       FileUtils.rm_f(PROFILE_FILE)
       @expected_profile_content = <<EOT
@@ -24,7 +24,7 @@ EOT
         @cmd.run(['2.5'])
       end
       ORR_BINARIES.each do |cmd|
-        assert_equal("/usr/bin/#{cmd}.ruby2.5", File.readlink(BIN_DIR + cmd))
+        assert_equal("/usr/bin/#{cmd}.ruby2.5", File.readlink("#{BIN_DIR}/#{cmd}"))
       end
 
       assert_equal(@expected_profile_content, File.read(PROFILE_FILE))

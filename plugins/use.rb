@@ -13,7 +13,7 @@ class OrrUseCommand < OrrCommand
       FileUtils.rm_f ORR_BINARIES
     end
     ORR_BINARIES.each do |cmd|
-      File.symlink("/usr/bin/#{cmd}.ruby#{ruby_version}", BIN_DIR + cmd)
+      File.symlink("/usr/bin/#{cmd}.ruby#{ruby_version}", "#{BIN_DIR}/#{cmd}")
     end
 
     replace_profile(ruby_version)

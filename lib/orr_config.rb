@@ -1,10 +1,10 @@
 module OrrConfig
   HOME_DIR = ENV['HOME'] + '/'
   ORR_DIR = HOME_DIR + '.orr/'
-  BIN_DIR = ORR_DIR + 'bin/'
+  BIN_DIR = ORR_DIR + 'bin'
   PROFILE_FILE = HOME_DIR + '.orr_profile'
   GEMRC_FILE = HOME_DIR + '.gemrc'
-  BASHRC_FILE = HOME_DIR + '.bashrc'
+  SHELL_PROFILE_FILE = HOME_DIR + '.profile'
   ORR_BINARIES = %w[ruby irb gem rake].freeze
   OS_RELEASE = OrrSetup.new.osrelease_hash
   DISTRO = OS_RELEASE['NAME'] == 'openSUSE Tumbleweed' ? 'openSUSE_Tumbleweed' : "#{OS_RELEASE['NAME'].tr(' ', '_')}_#{OS_RELEASE['VERSION_ID']}"
